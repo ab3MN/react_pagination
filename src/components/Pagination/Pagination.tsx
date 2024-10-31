@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { FC } from 'react';
 import { getPagesCounter } from '../../utils/pagination/getPagesCounter';
+import { getTotalPage } from '../../utils/pagination/getTotalPage';
 
 interface IPagination {
   total: number;
@@ -10,22 +11,19 @@ interface IPagination {
 }
 
 export const Pagination: FC<IPagination> = ({
-  total: totalPages,
+  total,
   perPage,
   currentPage,
   onPageChange,
 }) => {
+  const totalPages = getTotalPage(total, perPage);
   const pageCounter = getPagesCounter(totalPages);
 
-  const prevPageHandler = () => {
-    if (currentPage - 1 < 1) return;
-    onPageChange(currentPage - 1);
-  };
+  const prevPageHandler = () =>
+    currentPage - 1 < 1 ? undefined : onPageChange(currentPage - 1);
 
-  const nextPageHandler = () => {
-    if (currentPage + 1 > totalPages) return;
-    onPageChange(currentPage + 1);
-  };
+  const nextPageHandler = () =>
+    currentPage + 1 > totalPages ? undefined : onPageChange(currentPage + 1);
 
   return (
     <ul className="pagination">

@@ -1,2 +1,2 @@
-export const getTotalPage = (items: Array<unknown>, perPage: number) =>
-  Math.ceil(items.length / perPage);
+export const getTotalPage = (length: number, perPage: number) =>
+  Math.ceil(length / perPage);

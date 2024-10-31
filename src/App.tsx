@@ -5,7 +5,6 @@ import { getItemsOnPage } from './utils/pagination/getItemsOnPage';
 import { getItemsOnPageCount } from './utils/pagination/getItemsOnPageCount';
 import { Pagination } from './components/Pagination';
 import { EPaginationSize } from './enums/Pagination';
-import { getTotalPage } from './utils/pagination/getTotalPage';
 
 const items = getNumbers(1, 42).map(n => `Item ${n}`);
 
@@ -24,8 +23,6 @@ export const App: React.FC = () => {
     setPerPage(pageSize);
     setCurrentPage(1);
   };
-
-  const totalPages = getTotalPage(items, perPage);
 
   const onPageChange = (page: number) => setCurrentPage(+page);
 
@@ -63,7 +60,7 @@ export const App: React.FC = () => {
       </div>
 
       <Pagination
-        total={totalPages}
+        total={items.length}
         perPage={perPage}
         currentPage={currentPage}
         onPageChange={onPageChange}
